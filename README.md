@@ -1,2 +1,6 @@
-# DBProject
-This is Project Repository of Hongik Class 'DataBase' 
+# Member
+
+- 박민규(B184022) :
+- 김문범(B189007) :
+- 마성훈(B089026) : 
+- 박상대(B084017) :
