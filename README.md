@@ -17,5 +17,6 @@
 > - 포지션 선정  
 > - 주제 선정  
 > - Database 설계  
-> - PHP 기본문법 교육
-> #### Homework : ~2015-10-14 Make PHP Program (For Statement, If Statement)
+> - PHP 기본문법 교육  
+>  
+> ####Homework : ~2015-10-14 Make PHP Program (For Statement, If Statement)
