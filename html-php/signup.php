@@ -10,14 +10,30 @@
     	<table border="1" align="center">
         	<tr><td><font size="9">회원가입</font></td></tr>
         	<tr><td> r g b 2</td></tr>
-        	<tr><td>3</td></tr>
-        	<tr><td>4</td></tr>
-        	<tr><td>5</td></tr>
-        	<tr><td>6</td></tr>
-        	<tr><td>7</td></tr>
-        	<tr><td>8</td></tr>
-        	<tr><td>9</td></tr>
-        	<tr><td>0</td></tr>
+        	<tr><td><table>
+                    	<tr><td>PassWord</td><td><input type="passwd"></td></tr>
+            </table></td></tr>
+            
+        	<tr><td><table>
+                    	<tr><td>Name</td><td><input type="text"></td></tr>
+            </table></td></tr>
+            
+        	<tr><td><table>
+                    	<tr><td>주민등록번호</td><td><input type="text"></td></tr>
+            </table></td></tr>
+            
+        	<tr><td><table>
+                    	<tr><td>핸드폰</td><td><input type="text"></td></tr>
+            </table></td></tr>
+            
+        	<tr><td><table>
+                    	<tr><td>E-Mail</td><td><input type="text"></td></tr>
+            </table></td></tr>
+            
+        	<tr><td><table>
+                    	<tr><td><input type="submit" value="가입하기"></td></tr>
+            </table></td></tr>
+            
         </table>
 	</body>
 </html>
