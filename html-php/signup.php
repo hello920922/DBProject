@@ -6,44 +6,44 @@
 </head>
 
 	<body>
-    <font size="5" color="900090">
-    	<table border="1" align="center">
+    <font size="5" color="#900090">
+    	<table align="center">
         
         	<tr><td align="center"><font size="9">회원가입</font></td></tr>
             
         	<tr><td>
             	<table>
-                    <tr><td width="140">ID</td><td width="176">: <input type="text" maxlength="15" size="15"></td></tr>
+                    <tr><td height="70" width="150">ID</td><td width="176">: <input type="text" maxlength="15" size="15"></td></tr>
             	</table>
             </td></tr>
             
         	<tr><td>
             	<table>
-                    	<tr><td width="140">PassWord</td><td>: <input type="password" maxlength="15" size="15"></td></tr>
+                    	<tr><td height="70" width="150">PassWord</td><td>: <input type="password" maxlength="15" size="15"></td></tr>
            		</table>
             </td></tr>
             
         	<tr><td>
             	<table>
-                    	<tr><td width="140">Name</td><td>: <input type="text" maxlength="30" size="30"></td></tr>
+                    	<tr><td height="70" width="150">Name</td><td>: <input type="text" maxlength="30" size="30"></td></tr>
             	</table>
             </td></tr>
             
         	<tr><td>
             	<table>
-                    	<tr><td width="140">주민등록번호</td><td>: <input type="text" maxlength="6" size="6">-<input type="password" maxlength="7" size="7"></td></tr>
+                    	<tr><td height="70" width="150">주민등록번호</td><td>: <input type="text" maxlength="6" size="6">-<input type="password" maxlength="7" size="7"></td></tr>
             	</table>
             </td></tr>
             
         	<tr><td>
             	<table>
-                    	<tr><td width="140">Phone</td><td>: <input type="text" maxlength="3" size="3">-<input type="text" maxlength="4" size="4">-<input type="text" maxlength="4" size="4"></td></tr>
+                    	<tr><td height="70" width="150">Phone</td><td>: <input type="text" maxlength="3" size="3">-<input type="text" maxlength="4" size="4">-<input type="text" maxlength="4" size="4"></td></tr>
             	</table>
             </td></tr>
             
         	<tr><td>
             	<table>
-                    	<tr><td width="140">E-Mail</td>
+                    	<tr><td height="70" width="150">E-Mail</td>
                         <td>
                         	: <input type="text" maxlength="30" size="30">@<select name="selct">
                        		<option value="">이메일 선택</option>
@@ -61,7 +61,8 @@
             
         	<tr><td>
             	<table align="center">
-                    	<tr><td><input type="submit" value="가입하기" ></td></tr>
+                		<tr><td height="50"></td></tr>
+                    	<tr><td><input type="submit" value="가입하기" style="height:50px; width:550px; color:white ; background-color:#900090 ;"></td></tr>
             	</table>
             </td></tr>
             
