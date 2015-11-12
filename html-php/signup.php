@@ -13,39 +13,39 @@
             
         	<tr><td>
             	<table>
-                    <tr><td>ID :</td><td width="176"><input type="text" maxlength="15" size="15"></td></tr>
+                    <tr><td width="140">ID</td><td width="176">: <input type="text" maxlength="15" size="15"></td></tr>
             	</table>
             </td></tr>
             
         	<tr><td>
             	<table>
-                    	<tr><td>PassWord :</td><td><input type="password" maxlength="15" size="15"></td></tr>
+                    	<tr><td width="140">PassWord</td><td>: <input type="password" maxlength="15" size="15"></td></tr>
            		</table>
             </td></tr>
             
         	<tr><td>
             	<table>
-                    	<tr><td>Name :</td><td><input type="text" maxlength="30" size="30"></td></tr>
+                    	<tr><td width="140">Name</td><td>: <input type="text" maxlength="30" size="30"></td></tr>
             	</table>
             </td></tr>
             
         	<tr><td>
             	<table>
-                    	<tr><td>주민등록번호 :</td><td><input type="text" maxlength="6" size="6">-<input type="password" maxlength="7" size="7"></td></tr>
+                    	<tr><td width="140">주민등록번호</td><td>: <input type="text" maxlength="6" size="6">-<input type="password" maxlength="7" size="7"></td></tr>
             	</table>
             </td></tr>
             
         	<tr><td>
             	<table>
-                    	<tr><td>Phone :</td><td><input type="text" maxlength="3" size="3">-<input type="text" maxlength="4" size="4">-<input type="text" maxlength="4" size="4"></td></tr>
+                    	<tr><td width="140">Phone</td><td>: <input type="text" maxlength="3" size="3">-<input type="text" maxlength="4" size="4">-<input type="text" maxlength="4" size="4"></td></tr>
             	</table>
             </td></tr>
             
         	<tr><td>
             	<table>
-                    	<tr><td>E-Mail :</td>
+                    	<tr><td width="140">E-Mail</td>
                         <td>
-                        	<input type="text" maxlength="30" size="30">@<select name="selct">
+                        	: <input type="text" maxlength="30" size="30">@<select name="selct">
                        		<option value="">이메일 선택</option>
     						<option value="">naver.com</option>
     						<option value="">daum.net</option>
