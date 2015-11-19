@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'Interpark';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./interpark_m.woff') format('woff');
+}
+body,td,th {
+    font-family: "Interpark";
+    font-size: 14px;
+    line-height:25px;
+    color: #604b71;
+}
+body {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}
+a{
+    text-decoration:none;
+}
+input, select {
+    font-family: "Interpark";
+    font-size:20px;
+}
+
+.mymenu{
+    font-family: "Interpark";
+    font-size: 20px;
+    color: #604b71;
+    font-weight: bold;
+}
+
+.mytitle {
+    font-family: "Interpark";
+    font-size: 35px;
+    line-height:21px;
+    color: #74416c;
+    font-weight: bold;
+}
+
+.myform {
+    font-family: "Interpark";
+    font-size: 20px;
+    color: #604b71;
+    color: #74416c;
+}
