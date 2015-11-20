@@ -10,6 +10,7 @@
     $phone_t = "";
     $img = "";
     $addr = "";
+    $qrcode = "";
     $lat = 0;
     $lng = 0;
     
@@ -28,6 +29,7 @@
         $sname = $result[0]['SNAME'];
         $category = $result[0]['CATEGORY'];
         $buid = $result[0]['BUID'];
+        $qrcode = $result[0]['QRCODE'];
         
         $tel = $result[0]['TEL'];
         $phone_h = substr($tel, 0, 3);
@@ -47,6 +49,14 @@
         document.ManagerForm.lat.value=<?php echo $lat; ?>;
         document.ManagerForm.lng.value=<?php echo $lng; ?>;
         document.ManagerForm.sname.value="<?php echo $sname; ?>";
+        document.ManagerForm.category.value="<?php echo $category; ?>";
+        document.ManagerForm.viewlicense.value="<?php echo $license; ?>";
+        document.ManagerForm.license.value="<?php echo $license; ?>";
+        document.ManagerForm.buid.value="<?php echo $buid; ?>";
+        document.ManagerForm.phone_h.value="<?php echo $phone_h; ?>";
+        document.ManagerForm.phone_m.value="<?php echo $phone_m; ?>";
+        document.ManagerForm.phone_t.value="<?php echo $phone_t; ?>";
+        document.ManagerForm.addr.value="<?php echo $addr; ?>";
     }
     function initMap(){
         var myLatlng = {lat:<?php echo $lat; ?>, lng:<?php echo $lng; ?>};
@@ -72,7 +82,7 @@
 <script type="text/javascript">
     function Submit(){
         var ok=true;
-        if(document.ManagerForm.name.value=='')
+        if(document.ManagerForm.sname.value=='')
             ok = false;
         else if(document.ManagerForm.category.value=='')
             ok = false;
@@ -140,7 +150,7 @@
             <tr><td height="40"></td></tr>
             
         	<tr><td>
-            	<form name="ManagerForm" action="function/changestore.php" method="POST" onSubmit="Submit();return false">
+            	<form enctype="multipart/form-data" name="ManagerForm" action="function/changestore.php" method="POST" onSubmit="Submit();return false">
                     <table cellpadding="0" cellspacing="0" border="0" align="center">
                         <tr>
                             <td height="60" width="170" class="myform" align="right">Store name</td>
@@ -152,7 +162,7 @@
                             <td height="60" width="170" class="myform" align="right">Category</td>
                             <td width="50"></td>
                             <td>
-                                <input type="text" name="stno" maxlength="10" size="15"/>
+                                <input type="text" name="category" maxlength="10" size="15"/>
                             </td>
                             <td width="50"></td>
                         </tr>
@@ -160,7 +170,8 @@
                             <td height="60" width="170" class="myform" align="right">Business license</td>
                             <td width="50"></td>
                             <td>
-                                <input type="text" name="stno" maxlength="10" size="15" disabled/>
+                                <input type="text" name="viewlicense" maxlength="10" size="15" disabled/>
+                                <input type="hidden" name="license"/>
                             </td>
                             <td width="50"></td>
                             <td height="60" width="170" class="myform" align="right">
@@ -196,29 +207,39 @@
                         <tr>
                             <td height="60" width="170" class="myform" align="right">Image</td>
                             <td width="50"</td>
-                            <td colspan="6">
+                            <td>
 
                                 <input type="file" name="upfile" onchange="document.all.filepath.value=document.all.upfile.value;" style="display:none;"/>
                             	<input type="text" name="filepath" style="font-size:15px; height:25px; width:200px; color:#808080;" readonly/>
                             	<input type="button" value="Upload" onclick="document.all.upfile.click();" style="font-size:15px; height:26px; color:white; background-color:#74416c; border:none;" />
                             </td>
+                            <td width="50"></td>
+                            <td height="60" width="170" class="myform" align="right">
+                                QRCode
+                            </td>
+                            <td width="50" colspan="3"></td>
                         </tr>
                         <tr>
                             <td height="60" width="170" class="myform" align="right"></td>
                             <td width="50"</td>
-                            <td colspan="6">
-                                <!-- ==================IMAGE================= -->
+                            <td height="220">
+                                <img src="<?php echo $img; ?>" width="200" height="200"/>
+                            </td>
+                            <td width="50"></td>
+                            <td colspan="4" style="padding-left:80px;">
+                                <img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&choe=UTF-8&chld=H|0&chl=<?php echo $qrcode; ?>" width="200" height="200"/>
                             </td>
                         </tr>
+                        <tr><td height="20"></td></tr>
                         <tr>
                             <td height="60" width="170" class="myform" align="right" valign="top">
                                 Location
                             </td>
                             <td width="50"></td>
-                            <td id="map" height="400" width="400" class="myform" colspan="5">
+                            <td id="map" height="400" width="200" colspan="5">
+                                <script> initMap(); </script>
                                 <input type="hidden" name="lat"/>
                                 <input type="hidden" name="lng"/>
-                                <script> initMap(); </script>
                             </td>
                             <td width="50"></td>
                         </tr>
@@ -227,7 +248,16 @@
                             <td width="50" colspan="7"></td>
                         </tr>
                         <tr>
-                            <td width="50" colspan="8"> MENU BOX</td>
+                            <td align="right">MENU BOX</td>
+                            <td colspan="6">
+                                <table border="3" cellpadding="0" cellspacing="0" width="100%" align="center" style="border-collapse:collapse;" rules="rows" frame="hsides">
+                                    <tr bgcolor="#96638e"> 
+                                        <td class="myform" align="center" height="30" width="30%" style="font-size:15px; color:#ffffff;">Image</td>
+                                        <td class="myform" align="center" height="30" width="50%" style="font-size:15px; color:#ffffff;">Item</td>
+                                        <td class="myform" align="center" height="30" width="20%" style="font-size:15px; color:#ffffff;">Price</td>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
                         <tr>
                         	<td colspan="8" height="30">
@@ -235,7 +265,7 @@
                         </tr>
                         <tr>
                         	<td colspan="8" align="center">
-                            	<input type="submit" value="Modify" class="mymenu" style="height:50px; width:80%; color:white; background-color:#74416c; border:none;" />
+                            	<input type="submit" value="Modify" class="mymenu" style="height:50px; width:90%; color:white; background-color:#74416c; border:none;" />
                             </td>
                         </tr>
                     </table>
