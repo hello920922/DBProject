@@ -13,7 +13,7 @@
     $qrcode = "";
     $lat = 0;
     $lng = 0;
-    
+
     if(!isset($_SESSION['id']) || !isset($_SESSION['name']))
         echo "<script> location.replace(\"./\"); </script>";
 
@@ -41,10 +41,128 @@
         $lat = $result[0]['LAT'];
         $lng = $result[0]['LNG'];
     }
+
+    function drawMenu($conn, $license){
+        $query  = "select IMG, ITEM, PRICE from MENU where ";
+        $query .= "LICENSE='".$license."'";
+
+        $result = selectQuery($conn, $query);
+
+        if($result != null){
+            for($i=0; $i<count($result); $i++){
+                echo "<tr>";
+
+                echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
+                echo "<img src=\"function/uploads/".$result[$i]['IMG']."\" height=\"100\" width=\"100\" />";
+                echo "</td>";
+
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo $result[$i]['ITEM'];
+                echo "</td>";
+
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo $result[$i]['PRICE'];
+                echo "</td>";
+
+                echo "</tr>";
+            }
+            if(count($result) < 4){
+                for($i=0; $i<4-count($result); $i++){
+                    echo "<tr>";
+
+                    echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
+                    echo "</td>";
+
+                    echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                    echo "</td>";
+
+                    echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                    echo "</td>";
+
+                    echo "</tr>";
+                }
+            }
+        }
+        else{
+            for($i=0; $i<4; $i++){
+                echo "<tr>";
+
+                echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
+                echo "</td>";
+
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo "</td>";
+
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo "</td>";
+
+                echo "</tr>";
+            }
+        }
+    }
+
+    function drawReview($conn, $license){
+        $query  = "select GRADE, NOTE, CID, DATE from REVIEW where ";
+        $query .= "LICENSE='".$license."'";
+
+        $result = selectQuery($conn, $query);
+
+        if($result != null){
+            for($i=0; $i<count($result); $i++){
+                echo "<tr>";
+
+                echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
+                echo "<img src=\"function/uploads/".$result[$i]['IMG']."\" height=\"100\" width=\"100\" />";
+                echo "</td>";
+
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo $result[$i]['ITEM'];
+                echo "</td>";
+
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo $result[$i]['PRICE'];
+                echo "</td>";
+
+                echo "</tr>";
+            }
+            if(count($result) < 4){
+                for($i=0; $i<4-count($result); $i++){
+                    echo "<tr>";
+
+                    echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
+                    echo "</td>";
+
+                    echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                    echo "</td>";
+
+                    echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                    echo "</td>";
+
+                    echo "</tr>";
+                }
+            }
+        }
+        else{
+            for($i=0; $i<4; $i++){
+                echo "<tr>";
+
+                echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
+                echo "</td>";
+
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo "</td>";
+
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo "</td>";
+
+                echo "</tr>";
+            }
+        }
+    }
 ?>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUWS8lvPsNsZEn0YKRi0YReesm6-GAZDU" type="text/javascript"></script>
-<script>
+    <script>
     window.onload = function(){
         document.ManagerForm.lat.value=<?php echo $lat; ?>;
         document.ManagerForm.lng.value=<?php echo $lng; ?>;
@@ -80,6 +198,9 @@
     }
 </script>
 <script type="text/javascript">
+    function AddMenu(){
+        location.replace("menuadd.php");
+    }
     function Submit(){
         var ok=true;
         if(document.ManagerForm.sname.value=='')
@@ -244,22 +365,6 @@
                             <td width="50"></td>
                         </tr>
                         <tr>
-                            <td height="60" width="170" class="myform" align="right">Menu</td>
-                            <td width="50" colspan="7"></td>
-                        </tr>
-                        <tr>
-                            <td align="right">MENU BOX</td>
-                            <td colspan="6">
-                                <table border="3" cellpadding="0" cellspacing="0" width="100%" align="center" style="border-collapse:collapse;" rules="rows" frame="hsides">
-                                    <tr bgcolor="#96638e"> 
-                                        <td class="myform" align="center" height="30" width="30%" style="font-size:15px; color:#ffffff;">Image</td>
-                                        <td class="myform" align="center" height="30" width="50%" style="font-size:15px; color:#ffffff;">Item</td>
-                                        <td class="myform" align="center" height="30" width="20%" style="font-size:15px; color:#ffffff;">Price</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
                         	<td colspan="8" height="30">
                             </td>
                         </tr>
@@ -268,6 +373,25 @@
                             	<input type="submit" value="Modify" class="mymenu" style="height:50px; width:90%; color:white; background-color:#74416c; border:none;" />
                             </td>
                         </tr>
+                        <tr><td height="100"></td></tr>
+                        <tr>
+                            <td height="60" width="170" class="myform" align="center" colspan="8" style="font-size:25px;">Menu</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <table border="3" cellpadding="0" cellspacing="0" width="100%" align="center" style="border-collapse:collapse;" rules="rows" frame="hsides">
+                                    <tr bgcolor="#96638e"> 
+                                        <td class="myform" align="center" height="30" width="110" style="font-size:15px; color:#ffffff;">Image</td>
+                                        <td class="myform" align="center" height="30" width="400" style="font-size:15px; color:#ffffff;">Item</td>
+                                        <td class="myform" align="center" height="30" width="200" style="font-size:15px; color:#ffffff;">Price</td>
+                                    </tr>
+                                    <?php drawMenu($conn, $license); ?>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr><td height="20"></td></tr>
+                        <tr><td colspan="8" align="right"></td></tr>
+                        <tr><td height="100"></td></tr>
                     </table>
                 </form>
             </td></tr>
