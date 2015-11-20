@@ -22,6 +22,13 @@
         else{
             $name = $result[0]['NAME'];
             $phone = $result[0]['PHONE'];
+
+            $phone_h = substr($phone,0,3);
+            $phone_m = substr($phone,3,4);
+            $phone_t = substr($phone,7,4);
+
+            $phone = $phone_h."-".$phone_m."-".$phone_t;
+
             $mail = $result[0]['EMAIL'];
             $gender = $result[0]['GENDER'];
             if(!strcmp($gender,"M"))
@@ -55,13 +62,13 @@
                 
                 echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;\">";
                 echo "<a href=\"detail.php?license=".$license."\" target=\"_self\" style=\"color:#000000;\">";
-                echo $category;
+                echo $sname;
                 echo "</a>";
                 echo "</td>";
                 
                 echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;\">";
                 echo "<a href=\"detail.php?license=".$license."\" target=\"_self\" style=\"color:#000000;\">";
-                echo $sname;
+                echo $category;
                 echo "</a>";
                 echo "</td>";
                 
@@ -157,8 +164,8 @@
                         <table border="3" cellpadding="0" cellspacing="0" width="100%" align="center" style="border-collapse:collapse;" rules="rows" frame="hsides">
                             <tr bgcolor="#96638e">
                                 <td class="myform" align="center" height="30" width="200" style="font-size:15px; color:#ffffff;">Image</td>
-                                <td class="myform" align="center" width="130" style="font-size:15px; color:#ffffff;">Category</td>
                                 <td class="myform" align="center" width="300" style="font-size:15px; color:#ffffff;">Name</td>
+                                <td class="myform" align="center" width="130" style="font-size:15px; color:#ffffff;">Category</td>
                                 <td class="myform" align="center" width="500" style="font-size:15px; color:#ffffff;">Address</td>
                             </tr>
                             <?php drawTable($stores); ?>
