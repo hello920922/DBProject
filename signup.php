@@ -147,9 +147,9 @@
                             </td>
                             <td width="50"></td>
                             <td class="myform">
-                                <label><input type="radio" name="gender" value="M" />남자</label>
+                                <label><input type="radio" name="gender" value="M" />Male</label>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <label><input type="radio" name="gender" value="F" />여자</label>
+                                <label><input type="radio" name="gender" value="F" />Female</label>
                             </td>
                             <td width="50"></td>
                         </tr>
@@ -173,7 +173,7 @@
                             <td class="myform">
                                 <input type="text" name="mail_h" maxlength="15" size="15"/> @ 
                                 <select name="mail_t">
-                                    <option value="">이메일 선택</option>
+                                    <option value="">Choose Email</option>
                                     <option value="naver">naver.com</option>
                                     <option value="daum">hanmail.net</option>
                                     <option value="gmail">gmail.com</option>
