@@ -127,7 +127,7 @@
                             <td width="50"></td>
                             <td>
                                 <input type="file" name="upfile" onchange="document.all.filepath.value=document.all.upfile.value;" style="display:none;"/>
-                            	<input type="text" name="filepath" style="font-size:15px; height:25px; width:160px; color:#808080;" />
+                            	<input type="text" name="filepath" style="font-size:15px; height:25px; width:160px; color:#808080;" readonly/>
                             	<input type="button" value="Upload" onclick="document.all.upfile.click();" style="font-size:15px; height:26px; color:white; background-color:#74416c; border:none;" />
                             </td>
                             <td width="50"></td>
