@@ -1,8 +1,80 @@
 <?php
     session_start();
 
+    $stores = null;
+
     if(!isset($_SESSION['id']) || !isset($_SESSION['name']))
         echo "<script> location.replace(\"./\"); </script>";
+    else{
+        include("function/dbconnect.php");
+
+        $id = $_SESSION['id'];
+
+        $query  = "select NAME, PHONE, EMAIL, GENDER from OWNER ";
+        $query .= "where OID='".$id."'";
+
+        $result = selectQuery($conn, $query);
+
+        if($result == null){
+            echo "<script> alert(\"Fail to bring user information\"); </script>";
+            echo "<script> history.back(); </script>";
+        }
+        else{
+            $name = $result[0]['NAME'];
+            $phone = $result[0]['PHONE'];
+            $mail = $result[0]['EMAIL'];
+            $gender = $result[0]['GENDER'];
+            if(!strcmp($gender,"M"))
+                $gender="Male";
+            else
+                $gender="Female";
+        }
+
+        $query  = "select LICENSE, IMG, CATEGORY, SNAME, ADDR from STORE where ";
+        $query .= "OID='".$id."'";
+
+        $stores = selectQuery($conn, $query);
+    }
+
+    function drawTable($stores){
+        if(!$stores==null){
+            for($i=0; $i<count($stores); $i++){
+                $img = "function/uploads/".$stores[$i]['IMG'];
+                $category = $stores[$i]['CATEGORY'];
+                $sname = $stores[$i]['SNAME'];
+                $addr = $stores[$i]['ADDR'];
+                $license = $stores[$i]['LICENSE'];
+
+                echo "<tr>";
+
+                echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
+                echo "<a href=\"detail.php?license=".$license."\" target=\"_self\">";
+                echo "<img src=\"".$img."\" height=\"100\" width=\"100\" />";
+                echo "</a>";
+                echo "</td>";
+                
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;\">";
+                echo "<a href=\"detail.php?license=".$license."\" target=\"_self\" style=\"color:#000000;\">";
+                echo $category;
+                echo "</a>";
+                echo "</td>";
+                
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;\">";
+                echo "<a href=\"detail.php?license=".$license."\" target=\"_self\" style=\"color:#000000;\">";
+                echo $sname;
+                echo "</a>";
+                echo "</td>";
+                
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;\">";
+                echo "<a href=\"detail.php?license=".$license."\" target=\"_self\" style=\"color:#000000;\">";
+                echo $addr;
+                echo "</a>";
+                echo "</td>";
+                
+                echo "</tr>";
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
@@ -42,102 +114,58 @@
         	<tr><td height="100"></td></tr>
         
             <tr><td align="center" class="mytitle">
-                Store Manager
+                Store List
             </td></tr>
             
             <tr><td height="40"></td></tr>
-            
-        	<tr><td>
-            	<form action="REGISTER PROCESS" method="post">
-                    <table cellpadding="0" cellspacing="0" border="0" align="center">
-                        <tr>
-                            <td height="60" width="170" class="myform" align="right">Store name</td>
-                            <td width="50"></td>
-                            <td>
-                                <input type="text" name="name" maxlength="20" size="15"/>
-                            </td>
-                            <td width="50"></td>
-                            <td height="60" width="170" class="myform" align="right">Category</td>
-                            <td width="50"></td>
-                            <td>
-                                <select name="category">
-                                    <option value="ko">Korean</option>
-                                    <option value="ja">Japanese</option>
-                                    <option value="ch">Chinese</option>
-                                    <option value="noodles">Noodles</option>
-                                    <option value="daum">Pizza</option>
-                                    <option value="gmail">Chinese</option>
-                                    <option value="nate">nate.com</option>
-                                    <option value="dreamwiz">dreamwiz.com</option>
-                                    <option value="korea">korea.com</option>
-                                    <option value="outlook">outlook.com</option>
-								</select>
-                            </td>
-                            <td width="50"></td>
-                        </tr>
-                        <tr>
-                            <td height="60" width="170" class="myform" align="right">Business license</td>
-                            <td width="50"></td>
-                          <td>
-                                <input type="text" name="stno" maxlength="10" size="15"/>
-                            </td>
-                            <td width="50"></td>
-                            <td height="60" width="170" class="myform" align="right">
-                                Beacon ID
-                            </td>
-                            <td width="50"></td>
-                            <td class="myform">
-                                <input type="text" name="buid" maxlength="15" size="15"/>
-                            </td>
-                            <td width="50"></td>
-                        </tr>
-                        <tr>
-                            <td height="60" width="170" class="myform" align="right">
-                                Tel
-                            </td>
-                            <td width="50"></td>
-                            <td class="myform" colspan="6">
-                                <input type="text" name="phone_h" maxlength="3" size="4"/> - 
-                                <input type="text" name="phone_m" maxlength="4" size="4"/> - 
-                                <input type="text" name="phone_t" maxlength="4" size="4"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td height="60" width="170" class="myform" align="right">Image</td>
-                            <td width="50"></td>
-                            <td>
-                            	<!-- ==================IMAGE================= -->
-                            </td>
-                            <td width="50"></td>
-                            <td height="60" width="170" class="myform" align="right">
-                                Location
-                            </td>
-                            <td width="50"></td>
-                            <td class="myform">
-                                <input type="text" name="location" maxlength="15" size="15"/>
-                            </td>
-                          <td width="50"></td>
-                        </tr>
-                        <tr>
-                            <td height="60" width="170" class="myform" align="right">Menu</td>
-                            <td width="50" colspan="7"></td>
-                        </tr>
-                        <tr>
-                            <td width="50" colspan="8"> MENU BOX</td>
-                        </tr>
-                        <tr>
-                        	<td colspan="8" height="30">
-                            </td>
-                        </tr>
-                        <tr>
-                        	<td colspan="8" align="center">
-                            	<input type="submit" value="Modify" class="mymenu" style="height:50px; width:80%; color:white; background-color:#74416c; border:none;" />
-                            </td>
-                        </tr>
-                    </table>
-                </form>
+
+        	<tr><td width="100%">
+                <table border="0" cellpadding="0" cellspacing="0" align="center">
+                    <tr>
+                        <td class="myform" style="font-size:25px;" align="center" colspan="8">User</td>
+                    </tr>
+                    <tr><td height="50"></td></tr>
+                    <tr>
+                        <td class="myform" align="right">Name </td>
+                        <td width="30"></td>
+                        <td class="myform"><font color="#000000"><?php echo $name; ?></font></td>
+                        <td width="30"></td>
+
+                        <td class="myform" align="right">Gender </td>
+                        <td width="30"></td>
+                        <td class="myform"><font color="#000000"><?php echo $gender; ?></font></td>
+                        <td width="30"></td>
+                    </tr>
+                    <tr><td height="30"></td></tr>
+                    <tr>
+                        <td class="myform" align="right">Phone </td>
+                        <td width="30"></td>
+                        <td class="myform" colspan="6"><font color="#000000"><?php echo $phone; ?></font></td>
+                    </tr>
+                    <tr><td height="30"></td></tr>
+                    <tr>
+                        <td class="myform" align="right">E-Mail </td>
+                        <td width="30"></td>
+                        <td class="myform" colspan="6"><font color="#000000"><?php echo $mail; ?></font></td>
+                    </tr>
+                    <tr><td height="80"></td></tr>
+                    <tr>
+                        <td class="myform" style="font-size:25px;" align="center" colspan="8">Store</td>
+                    </tr>
+                    <tr><td height="50"></td></tr>
+                	<tr><td width="100%" colspan="8">
+                        <table border="3" cellpadding="0" cellspacing="0" width="100%" align="center" style="border-collapse:collapse;" rules="rows" frame="hsides">
+                            <tr bgcolor="#96638e">
+                                <td class="myform" align="center" height="30" width="200" style="font-size:15px; color:#ffffff;">Image</td>
+                                <td class="myform" align="center" width="130" style="font-size:15px; color:#ffffff;">Category</td>
+                                <td class="myform" align="center" width="300" style="font-size:15px; color:#ffffff;">Name</td>
+                                <td class="myform" align="center" width="500" style="font-size:15px; color:#ffffff;">Address</td>
+                            </tr>
+                            <?php drawTable($stores); ?>
+                        </table>
+                    </td></tr>
+                </table>
             </td></tr>
-            
         </table>
 	</body>
 </html>
