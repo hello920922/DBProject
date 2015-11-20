@@ -23,7 +23,7 @@
     $success = executeQuery($conn, $query);
     if(!$success){
         echo "<script> alert(\"The id already exist!\"); </script>";
-        echo "<script> location.back(); </script>";
+        echo "<script> history.back(); </script>";
     }
     else{
         echo "<script> location.replace('../'); </script>";
