@@ -10,7 +10,7 @@
 <?php
     session_start();
 
-    $index="register.php";
+    $index="manage.php";
     if(!isset($_SESSION['id']) || !isset($_SESSION['name']))
         $index="signin.php";
 ?>
