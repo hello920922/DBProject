@@ -111,16 +111,25 @@
             for($i=0; $i<count($result); $i++){
                 echo "<tr>";
 
-                echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
-                echo "<img src=\"function/uploads/".$result[$i]['IMG']."\" height=\"100\" width=\"100\" />";
+                echo "<td align=\"center\" width=\"50\" height=\"110\" class=\"myform\">";
+                $grade = (int)$result[$i]['GRADE'];
+                for($j=0; $j<$grade; $j++)
+                    echo "★";
+                if($grade < $result[$i]['GRADE']){
+                    echo "☆";
+                }
                 echo "</td>";
 
                 echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
-                echo $result[$i]['ITEM'];
+                echo $result[$i]['NOTE'];
                 echo "</td>";
 
                 echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
-                echo $result[$i]['PRICE'];
+                echo $result[$i]['CID'];
+                echo "</td>";
+
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo $result[$i]['DATE'];
                 echo "</td>";
 
                 echo "</tr>";
@@ -129,7 +138,10 @@
                 for($i=0; $i<4-count($result); $i++){
                     echo "<tr>";
 
-                    echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
+                    echo "<td align=\"center\" width=\"50\" height=\"110\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                    echo "</td>";
+
+                    echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
                     echo "</td>";
 
                     echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
@@ -146,7 +158,10 @@
             for($i=0; $i<4; $i++){
                 echo "<tr>";
 
-                echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
+                echo "<td align=\"center\" width=\"50\" height=\"110\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo "</td>";
+
+                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
                 echo "</td>";
 
                 echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
@@ -198,7 +213,7 @@
     }
 </script>
 <script type="text/javascript">
-    function AddMenu(){
+    function addMenu(){
         location.replace("menuadd.php");
     }
     function Submit(){
@@ -240,7 +255,7 @@
     <font color="#900090">
     	<table width="100%" cellpadding="0" cellspacing="0" border="0">
             <tr height="114">
-                <td height="114" width="100%" style="background-image:url(images/bg.png);background-repeat:repeat-x;">                    
+                <td height="114" width="100%" style="background-image:url(images/bg.png);backg8round-repeat:repeat-x;">                    
                 	<table width="100%" height="90" cellpadding="0" cellspacing="0" border="0">
                     <tr>
 	                    <td width="20%" align="center" class="mymenu">
@@ -390,8 +405,27 @@
                             </td>
                         </tr>
                         <tr><td height="20"></td></tr>
-                        <tr><td colspan="8" align="right"></td></tr>
+                        <tr><td colspan="8" align="right">
+                            <input type="button" value="Add Menu" onclick="addMenu();" class="mymenu" style="height:50px; width:150px; color:white; background-color:#74416c; border:none;" />
+                        </td></tr>
                         <tr><td height="100"></td></tr>
+                        <tr>
+                            <td height="60" width="170" class="myform" align="center" colspan="8" style="font-size:25px;">Review</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <table border="3" cellpadding="0" cellspacing="0" width="100%" align="center" style="border-collapse:collapse;" rules="rows" frame="hsides">
+                                    <tr bgcolor="#96638e"> 
+                                        <td class="myform" align="center" height="30" width="50" style="font-size:15px; color:#ffffff;">Grade</td>
+                                        <td class="myform" align="center" height="30" width="430" style="font-size:15px; color:#ffffff;">Review</td>
+                                        <td class="myform" align="center" height="30" width="100" style="font-size:15px; color:#ffffff;">Writer</td>
+                                        <td class="myform" align="center" height="30" width="130" style="font-size:15px; color:#ffffff;">Date</td>
+                                    </tr>
+                                    <?php drawReview($conn, $license); ?>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr><td height="150"></td></tr>
                     </table>
                 </form>
             </td></tr>
