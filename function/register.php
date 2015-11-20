@@ -27,12 +27,16 @@
 
             $uploadfile = "uploads/".$img; 
 
-            if(is_uploaded_file($_FILES['upfile']['tmp_name'])){
-            }
-            if(!move_uploaded_file($_FILES['upfile']['tmp_name'], $uploadfile)){
-                echo "<script> alert(\"Upload fail....\"); </script>";
+            $query  = "select * form BEACON ";
+            $query .= "where BUID='".$buid."' and ";
+            $query .= "LICENSE='".$license."'";
+
+            $result = selectQuery($conn, $query);
+            if(!$result == null){
+                echo "<script> alert(\"License or Beacon Number already exists!\"); </script>";
                 echo "<script> history.back(); </script>";
             }
+
             $query  = "insert into STORE values(";
             $query .= "'".$license."', ";
             $query .= "'".$id."', ";
@@ -47,11 +51,32 @@
             $success = executeQuery($conn, $query);
 
             if(!$success){
-                echo "<script> alert(\"Beacon or License Number already exists!\"); </script>";
+                echo "<script> alert(\"License Number already exists!\"); </script>";
                 echo "<script> history.back(); </script>";
             }
             else{
-                echo "<script> location.replace(\"../\"); </script>";
+                $qrcode = $buid.$license."qrcode";
+
+                $query  = "insert into BEACON values(";
+                $query .= "'".$buid."', ";
+                $query .= "'".$license."', ";
+                $query .= "'".$qrcode."')";
+                $success = executeQuery($conn, $query);
+
+                if(!$success){
+                    echo "<script> alert(\"Beacon Number already exists!\"); </script>";
+                    echo "<script> history.back(); </script>";
+                }
+                else{
+                    if(is_uploaded_file($_FILES['upfile']['tmp_name'])){
+                    }
+                    if(!move_uploaded_file($_FILES['upfile']['tmp_name'], $uploadfile)){
+                        echo "<script> alert(\"Upload fail....\"); </script>";
+                        echo "<script> history.back(); </script>";
+                    }
+
+                    echo "<script> location.replace(\"../\"); </script>";
+                }
             }
         }
     }
