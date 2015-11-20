@@ -17,8 +17,7 @@
 
         while($row = mysqli_fetch_assoc($result)){
              $returnarr[$i++] = $row;
-        }
- 
+        } 
         return $returnarr;
     }
 

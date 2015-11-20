@@ -20,19 +20,17 @@
     $query .= "'".$phone."', ";
     $query .= "'".$mail."')";
 
+    $success = executeQuery($conn, $query);
+    if(!$success){
+        echo "<script> alert(\"The id already exist!\"); </script>";
+        echo "<script> location.back(); </script>";
+    }
+    else{
+        echo "<script> location.replace('../'); </script>";
 
-    echo "<script> alert(\"";
+        session_start();
 
-    echo $query;
-        
-    echo "\"); </script> ";
-
-    executeQuery($conn, $query);
-
-    echo "<script> location.replace('../'); </script>";
-
-    session_start();
-
-    $_SESSION['id'] = $id;
-    $_SESSION['name'] = $name;
+        $_SESSION['id'] = $id;
+        $_SESSION['name'] = $name;
+    }
 ?>
