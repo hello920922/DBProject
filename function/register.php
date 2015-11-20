@@ -16,7 +16,22 @@
         $addr = $_POST['addr'];
         $lat = $_POST['lat'];
         $lng = $_POST['lng'];
-            
+
+        $uploaddir = '/var/www/uploads/';
+        $uploadfile = $uploaddir.basename($_FILES['upfile']['name']);
+
+        if(is_uploaded_file($_FILES['upfile']['tmp_name'])){
+            echo "Upload filename : ".$_FILES['upfile']['name']."<br>";
+            echo "Upload filesize : ".$_FILES['upfile']['size']."<br>";
+            echo "Upload file MIME type : ".$_FILES['upfile']['type']."<br>";
+            echo "TEMP FILE : ".$_FILES['upfile']['tmp_name']."<br>";
+        }
+        if(move_uploaded_file($_FILES['upfile']['tmp_name'], $uploadfile)){
+            echo "<script> alert(\"Upload success!\"); </script>";
+        }
+        print_r($_FILES);
+        echo "hello";
+       /* 
         if($result == null){
             echo "<script> alert(\"Wrong password\"); ";
             echo "location.replace(\"../account.php\"); </script>";
@@ -43,6 +58,6 @@
 
             executeQuery($conn, $updatequery);
             echo $updatequery;
-        }
+        }*/
     }
 ?>
