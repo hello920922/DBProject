@@ -1,9 +1,101 @@
 <?php
     session_start();
 
+    $sname = "";
+    $category = "";
+    $license = $_GET['license'];
+    $buid = "";
+    $phone_h = "";
+    $phone_m = "";
+    $phone_t = "";
+    $img = "";
+    $addr = "";
+    $lat = 0;
+    $lng = 0;
+    
     if(!isset($_SESSION['id']) || !isset($_SESSION['name']))
         echo "<script> location.replace(\"./\"); </script>";
+
+    include("function/dbconnect.php");
+
+    $query  = "select SNAME, CATEGORY, BUID, QRCODE, TEL, ADDR, IMG, ";
+    $query .= "LAT, LNG from STORE, BEACON ";
+    $query .= "where BEACON.LICENSE='".$license."'";
+
+    $result = selectQuery($conn, $query);
+
+    if(!$result == null){
+        $sname = $result[0]['SNAME'];
+        $category = $result[0]['CATEGORY'];
+        $buid = $result[0]['BUID'];
+        
+        $tel = $result[0]['TEL'];
+        $phone_h = substr($tel, 0, 3);
+        $phone_m = substr($tel, 3, 4);
+        $phone_t = substr($tel, 7, 4);
+        
+        $addr = $result[0]['ADDR'];
+        $img = "function/uploads/".$result[0]['IMG'];
+        $lat = $result[0]['LAT'];
+        $lng = $result[0]['LNG'];
+    }
 ?>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUWS8lvPsNsZEn0YKRi0YReesm6-GAZDU" type="text/javascript"></script>
+<script>
+    window.onload = function(){
+        document.ManagerForm.lat.value=<?php echo $lat; ?>;
+        document.ManagerForm.lng.value=<?php echo $lng; ?>;
+        document.ManagerForm.sname.value="<?php echo $sname; ?>";
+    }
+    function initMap(){
+        var myLatlng = {lat:<?php echo $lat; ?>, lng:<?php echo $lng; ?>};
+ 
+        var map = new google.maps.Map(document.getElementById('map'),{
+            zoom:15,
+            center: myLatlng
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'Is this your store?'
+        });
+
+        map.addListener('click', function(event){
+            marker.setPosition(event.latLng);
+            document.ManagerForm.lat.value=marker.getPosition().lat();
+            document.ManagerForm.lng.value=marker.getPosition().lng();
+        });
+    }
+</script>
+<script type="text/javascript">
+    function Submit(){
+        var ok=true;
+        if(document.ManagerForm.name.value=='')
+            ok = false;
+        else if(document.ManagerForm.category.value=='')
+            ok = false;
+        else if(document.ManagerForm.license.value=='')
+            ok = false;
+        else if(document.ManagerForm.phone_h.value=='')
+            ok = false;
+        else if(document.ManagerForm.phone_m.value=='')
+            ok = false;
+        else if(document.ManagerForm.phone_t.value=='')
+            ok = false;
+        else if(document.ManagerForm.buid.value=='')
+            ok = false;
+        else if(document.ManagerForm.addr.value=='')
+            ok = false;
+        if(!ok)
+            alert("Please fill in all forms.");
+        else{
+            document.ManagerForm.submit();
+            return true;
+        }
+    }
+</script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -48,13 +140,13 @@
             <tr><td height="40"></td></tr>
             
         	<tr><td>
-            	<form action="REGISTER PROCESS" method="post">
+            	<form name="ManagerForm" action="function/changestore.php" method="POST" onSubmit="Submit();return false">
                     <table cellpadding="0" cellspacing="0" border="0" align="center">
                         <tr>
                             <td height="60" width="170" class="myform" align="right">Store name</td>
                             <td width="50"></td>
                             <td>
-                                <input type="text" name="name" maxlength="20" size="15"/>
+                                <input type="text" name="sname" maxlength="20" size="15"/>
                             </td>
                             <td width="50"></td>
                             <td height="60" width="170" class="myform" align="right">Category</td>
@@ -68,7 +160,7 @@
                             <td height="60" width="170" class="myform" align="right">Business license</td>
                             <td width="50"></td>
                             <td>
-                                <input type="text" name="stno" maxlength="10" size="15"/>
+                                <input type="text" name="stno" maxlength="10" size="15" disabled/>
                             </td>
                             <td width="50"></td>
                             <td height="60" width="170" class="myform" align="right">
@@ -92,20 +184,43 @@
                             </td>
                         </tr>
                         <tr>
-                            <td height="60" width="170" class="myform" align="right">Image</td>
-                            <td width="50"></td>
-                            <td>
-                            	<!-- ==================IMAGE================= -->
+                            <td height="60" width="170" class="myform" align="right">
+                                Address
                             </td>
                             <td width="50"></td>
-                            <td height="60" width="170" class="myform" align="right">
+                            <td class="myform" colspan="5">
+                                <input type="text" name="addr" size="55"/>
+                            </td>
+                            <td width="50"></td>
+                        </tr>
+                        <tr>
+                            <td height="60" width="170" class="myform" align="right">Image</td>
+                            <td width="50"</td>
+                            <td colspan="6">
+
+                                <input type="file" name="upfile" onchange="document.all.filepath.value=document.all.upfile.value;" style="display:none;"/>
+                            	<input type="text" name="filepath" style="font-size:15px; height:25px; width:200px; color:#808080;" readonly/>
+                            	<input type="button" value="Upload" onclick="document.all.upfile.click();" style="font-size:15px; height:26px; color:white; background-color:#74416c; border:none;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="60" width="170" class="myform" align="right"></td>
+                            <td width="50"</td>
+                            <td colspan="6">
+                                <!-- ==================IMAGE================= -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="60" width="170" class="myform" align="right" valign="top">
                                 Location
                             </td>
                             <td width="50"></td>
-                            <td class="myform">
-                                <input type="text" name="location" maxlength="15" size="15"/>
+                            <td id="map" height="400" width="400" class="myform" colspan="5">
+                                <input type="hidden" name="lat"/>
+                                <input type="hidden" name="lng"/>
+                                <script> initMap(); </script>
                             </td>
-                          <td width="50"></td>
+                            <td width="50"></td>
                         </tr>
                         <tr>
                             <td height="60" width="170" class="myform" align="right">Menu</td>
