@@ -6,7 +6,6 @@
 <link rel="shortcut icon" href="images/title.ico"/>
 <link href="css/mystyle.css" rel="stylesheet" type="text/css" />
 </head>
-
 <?php
     session_start();
 

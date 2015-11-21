@@ -64,7 +64,7 @@ else{
                     echo "<script> history.back(); </script>";
                 }
             }
-            echo "<script> location.replace(\"../\"); </script>";
+            echo "<script> location.replace(\"../detail.php?license=".$license."\"); </script>";
         }
     }
 }

@@ -27,12 +27,12 @@
 
             $uploadfile = "uploads/".$img; 
 
-            $query  = "select * form BEACON ";
+            $query  = "select * from BEACON ";
             $query .= "where BUID='".$buid."' and ";
             $query .= "LICENSE='".$license."'";
 
             $result = selectQuery($conn, $query);
-            if(!$result == null){
+            if($result != null){
                 echo "<script> alert(\"License or Beacon Number already exists!\"); </script>";
                 echo "<script> history.back(); </script>";
             }

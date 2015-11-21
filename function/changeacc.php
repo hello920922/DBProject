@@ -20,7 +20,6 @@
 
         if($result == null){
             echo "<script> alert(\"Wrong password\"); ";
-            echo "location.replace(\"../account.php\"); </script>";
         }
         else if(!strcmp($newpasswd,"")){
             $updatequery  = "update OWNER set ";
@@ -31,7 +30,6 @@
             $updatequery .= "OID='".$id."'";
 
             executeQuery($conn, $updatequery);
-            echo $updatequery;
         }
         else{
             $updatequery  = "update OWNER set ";
@@ -43,7 +41,7 @@
             $updatequery .= "OID='".$id."'";
 
             executeQuery($conn, $updatequery);
-            echo $updatequery;
         }
+        echo "location.replace(\"../account.php\"); </script>";
     }
 ?>
