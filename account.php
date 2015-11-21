@@ -85,6 +85,16 @@
         }
     }
 
+    function deleteAccount(){
+        if(document.ChangeForm.passwd.value==''){
+            alert("Please input password");
+            return;
+        }
+        document.DeleteForm.delpasswd.value = document.ChangeForm.passwd.value;
+        document.DeleteForm.delid.value = "<?php echo $id; ?>";
+        document.DeleteForm.submit();
+    }
+
 </script>
 
 	<body>
@@ -122,8 +132,8 @@
             <tr><td height="40"></td></tr>
             
         	<tr><td>
-            	<form name="ChangeForm" action="function/changeacc.php" method="POST" onSubmit="Submit();return false">
                     <table cellpadding="0" cellspacing="0" border="0" align="center">
+            	        <form name="ChangeForm" action="function/changeacc.php" method="POST" onSubmit="Submit();return false">
                         <tr>
                             <td height="60" width="170" class="myform" align="right">
                                 ID
@@ -244,8 +254,18 @@
                             	<input type="submit" value="Save Changes" class="mymenu" style="height:50px; width:95%; color:white; background-color:#74416c; border:none;" />
                             </td>
                         </tr>
+                        </form>
+                        <tr><td height="10"></td></tr>
+                        <tr>
+                        	<td colspan="4" align="center">
+                                <form name="DeleteForm" method="POST" action="function/deleteacc.php">
+                                <input type="hidden" name="delpasswd"/><input type="hidden" name="delid"/>
+                                <input type="button" onclick="deleteAccount();" value="Delete Account" class="mymenu" style="height:50px; width:95%; color:white; background-color:#74416c; border:none;" />
+                                </form>
+                            </td>
+                        </tr>
+                        <tr><td height="60"></td></tr>
                     </table>
-                </form>
             </td></tr>
             
         </table>
