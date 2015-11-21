@@ -50,53 +50,92 @@
 
         if($result != null){
             for($i=0; $i<count($result); $i++){
-                echo "<tr>";
+                echo "<tr>\r\n";
 
-                echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
-                echo "<img src=\"function/uploads/".$result[$i]['IMG']."\" height=\"100\" width=\"100\" />";
-                echo "</td>";
+                echo "<td align=\"center\" class=\"myform\" width=\"210\" height=\"110\">\r\n";
+                echo "<img src=\"function/uploads/".$result[$i]['IMG']."\" height=\"100\" width=\"100\" />\r\n";
+                echo "</td>\r\n";
 
-                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo "<td align=\"center\" class=\"myform\" width=\"400\" style=\"word-break:break-all;color:#000000\">\r\n";
                 echo $result[$i]['ITEM'];
-                echo "</td>";
+                echo "</td>\r\n";
 
-                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
+                echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
                 echo $result[$i]['PRICE'];
-                echo "</td>";
+                echo "</td>\r\n";
 
-                echo "</tr>";
+                echo "</tr>\r\n";
             }
-            if(count($result) < 4){
-                for($i=0; $i<4-count($result); $i++){
-                    echo "<tr>";
+            echo "<tr>\r\n";
 
-                    echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
-                    echo "</td>";
+            echo "<td align=\"center\" class=\"myform\" width=\"210\" height=\"110\">\r\n";
+            echo "<input type=\"file\" name=\"upitem\" onchange=\"document.all.itempath.value=document.all.upitem.value;\" style=\"display:none;\"/>\r\n";
+            echo "<input type=\"text\" name=\"itempath\" style=\"font-size:15px; height:25px; width:200px; color:#808080;\" readonly/><br><br>\r\n";
+            echo "<input type=\"button\" value=\"Upload\" onclick=\"document.all.upitem.click();\" style=\"font-size:15px; height:26px; color:white; background-color:#74416c; border:none;\" />\r\n";
+            echo "</td>\r\n";
 
-                    echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
-                    echo "</td>";
+            echo "<td align=\"center\" class=\"myform\" width=\"400\" style=\"word-break:break-all;color:#000000\">\r\n";
+            echo "<input type=\"text\" name=\"item\" size=\"30\"/>\r\n";
+            echo "</td>\r\n";
 
-                    echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
-                    echo "</td>";
+            echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
+            echo "<input type=\"number\" name=\"price\" style=\"width:90px;\"/>\r\n";
+            echo "</td>\r\n";
 
-                    echo "</tr>";
+            echo "</tr>\r\n";
+
+
+            if(count($result) < 3){
+                for($i=0; $i<3-count($result); $i++){
+                    echo "<tr>\r\n";
+
+                    echo "<td align=\"center\" class=\"myform\" width=\"210\" height=\"110\">\t\n";
+                    echo "</td>\r\n";
+
+                    echo "<td align=\"center\" class=\"myform\" width=\"400\" style=\"word-break:break-all;color:#000000\">\r\n";
+                    echo "</td>\r\n";
+
+                    echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
+                    echo "</td>\r\n";
+
+                    echo "</tr>\r\n";
                 }
             }
         }
         else{
-            for($i=0; $i<4; $i++){
-                echo "<tr>";
+            echo "<tr>\r\n";
 
-                echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
-                echo "</td>";
+            echo "<td align=\"center\" class=\"myform\" width=\"210\" height=\"110\">\r\n";
+            echo "<input type=\"file\" name=\"upitem\" onchange=\"document.all.itempath.value=document.all.upitem.value;\" style=\"display:none;\"/>\r\n";
+            echo "<input type=\"text\" name=\"itempath\" style=\"font-size:15px; height:25px; width:200px; color:#808080;\" readonly/><br><br>\r\n";
+            echo "<input type=\"button\" value=\"Upload\" onclick=\"document.all.upitem.click();\" style=\"font-size:15px; height:26px; color:white; background-color:#74416c; border:none;\" />\r\n";
+            echo "</td>\r\n";
 
-                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
-                echo "</td>";
+            echo "<td align=\"center\" class=\"myform\" width=\"400\" style=\"word-break:break-all;color:#000000\">\r\n";
+            echo "<input type=\"text\" name=\"item\" size=\"30\"/>\r\n";
+            echo "</td>\r\n";
 
-                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
-                echo "</td>";
+            echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
+            echo "<input type=\"number\" name=\"price\" style=\"width:90px;\"/>\r\n";
+            echo "</td>\r\n";
 
-                echo "</tr>";
+            echo "</tr>\r\n";
+
+
+
+            for($i=0; $i<3; $i++){
+                echo "<tr>\r\n";
+
+                echo "<td align=\"center\" class=\"myform\" width=\"210\" height=\"110\">\r\n";
+                echo "</td>\r\n";
+
+                echo "<td align=\"center\" class=\"myform\" width=\"400\" style=\"word-break:break-all;color:#000000\">\r\n";
+                echo "</td>\r\n";
+
+                echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
+                echo "</td>\r\n";
+
+                echo "</tr>\r\n";
             }
         }
     }
@@ -190,6 +229,8 @@
         document.ManagerForm.phone_m.value="<?php echo $phone_m; ?>";
         document.ManagerForm.phone_t.value="<?php echo $phone_t; ?>";
         document.ManagerForm.addr.value="<?php echo $addr; ?>";
+        document.MenuForm.buid.value="<?php echo $buid; ?>";
+        document.MenuForm.license.value="<?php echo $license; ?>";
     }
     function initMap(){
         var myLatlng = {lat:<?php echo $lat; ?>, lng:<?php echo $lng; ?>};
@@ -214,7 +255,19 @@
 </script>
 <script type="text/javascript">
     function addMenu(){
-        location.replace("menuadd.php");
+        var ok=true;
+        if(document.MenuForm.itempath.value=='')
+            ok = false;
+        else if(document.MenuForm.item.value=='')
+            ok = false;
+        else if(document.MenuForm.price.value=='')
+            ok = false;
+        if(!ok)
+            alert("Please fill in all forms.");
+        else{
+            document.MenuForm.submit();
+            return true;
+        }
     }
     function Submit(){
         var ok=true;
@@ -286,8 +339,8 @@
             <tr><td height="40"></td></tr>
             
         	<tr><td>
-            	<form enctype="multipart/form-data" name="ManagerForm" action="function/changestore.php" method="POST" onSubmit="Submit();return false">
                     <table cellpadding="0" cellspacing="0" border="0" align="center">
+                    	<form enctype="multipart/form-data" name="ManagerForm" action="function/changestore.php" method="POST" onSubmit="Submit();return false">
                         <tr>
                             <td height="60" width="170" class="myform" align="right">Store name</td>
                             <td width="50"></td>
@@ -344,7 +397,6 @@
                             <td height="60" width="170" class="myform" align="right">Image</td>
                             <td width="50"</td>
                             <td>
-
                                 <input type="file" name="upfile" onchange="document.all.filepath.value=document.all.upfile.value;" style="display:none;"/>
                             	<input type="text" name="filepath" style="font-size:15px; height:25px; width:200px; color:#808080;" readonly/>
                             	<input type="button" value="Upload" onclick="document.all.upfile.click();" style="font-size:15px; height:26px; color:white; background-color:#74416c; border:none;" />
@@ -388,17 +440,21 @@
                             	<input type="submit" value="Modify" class="mymenu" style="height:50px; width:90%; color:white; background-color:#74416c; border:none;" />
                             </td>
                         </tr>
+                        </form>
                         <tr><td height="100"></td></tr>
                         <tr>
                             <td height="60" width="170" class="myform" align="center" colspan="8" style="font-size:25px;">Menu</td>
                         </tr>
+                    	<form enctype="multipart/form-data" name="MenuForm" action="function/addmenu.php" method="POST">
+                        <input type="hidden" name="buid"/>
+                        <input type="hidden" name="license"/>
                         <tr>
                             <td colspan="8">
                                 <table border="3" cellpadding="0" cellspacing="0" width="100%" align="center" style="border-collapse:collapse;" rules="rows" frame="hsides">
                                     <tr bgcolor="#96638e"> 
-                                        <td class="myform" align="center" height="30" width="110" style="font-size:15px; color:#ffffff;">Image</td>
+                                        <td class="myform" align="center" height="30" width="210" style="font-size:15px; color:#ffffff;">Image</td>
                                         <td class="myform" align="center" height="30" width="400" style="font-size:15px; color:#ffffff;">Item</td>
-                                        <td class="myform" align="center" height="30" width="200" style="font-size:15px; color:#ffffff;">Price</td>
+                                        <td class="myform" align="center" height="30" width="100" style="font-size:15px; color:#ffffff;">Price</td>
                                     </tr>
                                     <?php drawMenu($conn, $license); ?>
                                 </table>
@@ -406,8 +462,9 @@
                         </tr>
                         <tr><td height="20"></td></tr>
                         <tr><td colspan="8" align="right">
-                            <input type="button" value="Add Menu" onclick="addMenu();" class="mymenu" style="height:50px; width:150px; color:white; background-color:#74416c; border:none;" />
+                            <input type="button" onclick="addMenu();" value="Add Menu" class="mymenu" style="height:50px; width:150px; color:white; background-color:#74416c; border:none;" />
                         </td></tr>
+                        </form>
                         <tr><td height="100"></td></tr>
                         <tr>
                             <td height="60" width="170" class="myform" align="center" colspan="8" style="font-size:25px;">Review</td>
@@ -427,7 +484,6 @@
                         </tr>
                         <tr><td height="150"></td></tr>
                     </table>
-                </form>
             </td></tr>
             
         </table>
