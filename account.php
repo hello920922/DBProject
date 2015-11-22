@@ -90,9 +90,11 @@
             alert("Please input password");
             return;
         }
-        document.DeleteForm.delpasswd.value = document.ChangeForm.passwd.value;
-        document.DeleteForm.delid.value = "<?php echo $id; ?>";
-        document.DeleteForm.submit();
+        if(confirm("Are you sure you want to delete?") == true){
+            document.DeleteForm.delpasswd.value = document.ChangeForm.passwd.value;
+            document.DeleteForm.delid.value = "<?php echo $id; ?>";
+            document.DeleteForm.submit();
+        }
     }
 
 </script>
@@ -234,6 +236,7 @@
                             <td class="myform">
                                 <input type="text" name="mail_h" maxlength="15" size="15"/> @ 
                                 <select name="mail_t">
+                                    <option value="">Choose Email</option>
                                     <option value="naver.com">naver.com</option>
                                     <option value="hanmail.net">hanmail.net</option>
                                     <option value="gmail.com">gmail.com</option>
