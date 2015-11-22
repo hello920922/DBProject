@@ -54,29 +54,36 @@
 
                 echo "<tr>";
 
-                echo "<td align=\"center\" class=\"myform\" width=\"110\" height=\"110\">";
+                echo "<td align=\"center\" class=\"myform\" width=\"200\" height=\"110\">";
                 echo "<a href=\"detail.php?license=".$license."\" target=\"_self\">";
                 echo "<img src=\"".$img."\" height=\"100\" width=\"100\" />";
                 echo "</a>";
                 echo "</td>";
                 
-                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;\">";
+                echo "<td align=\"center\" class=\"myform\" width=\"250\" style=\"word-break:break-all;\">";
                 echo "<a href=\"detail.php?license=".$license."\" target=\"_self\" style=\"color:#000000;\">";
                 echo $sname;
                 echo "</a>";
                 echo "</td>";
                 
-                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;\">";
+                echo "<td align=\"center\" class=\"myform\" width=\"130\" style=\"word-break:break-all;\">";
                 echo "<a href=\"detail.php?license=".$license."\" target=\"_self\" style=\"color:#000000;\">";
                 echo $category;
                 echo "</a>";
                 echo "</td>";
                 
-                echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;\">";
+                echo "<td align=\"center\" class=\"myform\" width=\"450\" style=\"word-break:break-all;\">";
                 echo "<a href=\"detail.php?license=".$license."\" target=\"_self\" style=\"color:#000000;\">";
                 echo $addr;
                 echo "</a>";
                 echo "</td>";
+                
+                echo "<form method=\"POST\" action=\"function/deletestore.php\" onSubmit=\"Delete();return false\"/>\r\n";
+                echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;\">";
+                echo "<input type=\"hidden\" name=\"license\" value=\"".$license."\"/>";
+                echo "<input type=\"submit\" value=\"Delete\" style=\"font-size:15px; height:26px; color:white; background-color:#74416c; border:none;\" />";
+                echo "</td>";
+                echo "</form>";
                 
                 echo "</tr>";
             }
@@ -91,6 +98,17 @@
 <title>Beacon Store</title>
 <link rel="shortcut icon" href="images/title.ico"/>
 <link href="css/mystyle.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    function Delete(){
+        if(confirm("Are you sure you want to delete?")==true){
+            this.submit();
+            return true;
+        }
+    }
+</script>
+
+
 </head>
 	<body>
     <font color="#900090">
@@ -164,9 +182,9 @@
                         <table border="3" cellpadding="0" cellspacing="0" width="100%" align="center" style="border-collapse:collapse;" rules="rows" frame="hsides">
                             <tr bgcolor="#96638e">
                                 <td class="myform" align="center" height="30" width="200" style="font-size:15px; color:#ffffff;">Image</td>
-                                <td class="myform" align="center" width="300" style="font-size:15px; color:#ffffff;">Name</td>
+                                <td class="myform" align="center" width="250" style="font-size:15px; color:#ffffff;">Name</td>
                                 <td class="myform" align="center" width="130" style="font-size:15px; color:#ffffff;">Category</td>
-                                <td class="myform" align="center" width="500" style="font-size:15px; color:#ffffff;">Address</td>
+                                <td class="myform" colspan="2" align="center" width="450" style="font-size:15px; color:#ffffff;">Address</td>
                             </tr>
                             <?php drawTable($stores); ?>
                         </table>

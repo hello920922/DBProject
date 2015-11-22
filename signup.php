@@ -174,13 +174,13 @@
                                 <input type="text" name="mail_h" maxlength="15" size="15"/> @ 
                                 <select name="mail_t">
                                     <option value="">Choose Email</option>
-                                    <option value="naver">naver.com</option>
-                                    <option value="daum">hanmail.net</option>
-                                    <option value="gmail">gmail.com</option>
-                                    <option value="nate">nate.com</option>
-                                    <option value="dreamwiz">dreamwiz.com</option>
-                                    <option value="korea">korea.com</option>
-                                    <option value="outlook">outlook.com</option>
+                                    <option value="naver.com">naver.com</option>
+                                    <option value="hanmail.net">hanmail.net</option>
+                                    <option value="gmail.com">gmail.com</option>
+                                    <option value="nate.com">nate.com</option>
+                                    <option value="dreamwiz.com">dreamwiz.com</option>
+                                    <option value="korea.com">korea.com</option>
+                                    <option value="outlook.com">outlook.com</option>
 								</select>
                             </td>
                             <td width="50"></td>
