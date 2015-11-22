@@ -21,12 +21,13 @@
 
     $query  = "select SNAME, CATEGORY, BUID, QRCODE, TEL, ADDR, IMG, ";
     $query .= "LAT, LNG from STORE, BEACON ";
-    $query .= "where BEACON.LICENSE='".$license."'";
+    $query .= "where STORE.LICENSE='".$license."' and ";
+    $query .= "STORE.LICENSE=BEACON.LICENSE";
 
     $result = selectQuery($conn, $query);
 
     if(!$result == null){
-        $sname = $result[0]['SNAME'];
+        $sname = str_replace('"', '\"',$result[0]['SNAME']);
         $category = $result[0]['CATEGORY'];
         $buid = $result[0]['BUID'];
         $qrcode = $result[0]['QRCODE'];
@@ -52,11 +53,11 @@
             for($i=0; $i<count($result); $i++){
                 echo "<tr>\r\n";
 
-                echo "<td align=\"center\" class=\"myform\" width=\"210\" height=\"110\">\r\n";
+                echo "<td align=\"center\" class=\"myform\" width=\"160\" height=\"110\">\r\n";
                 echo "<img src=\"function/uploads/".$result[$i]['IMG']."\" height=\"100\" width=\"100\" />\r\n";
                 echo "</td>\r\n";
 
-                echo "<td align=\"center\" class=\"myform\" width=\"400\" style=\"word-break:break-all;color:#000000\">\r\n";
+                echo "<td align=\"center\" class=\"myform\" width=\"350\" style=\"word-break:break-all;color:#000000\">\r\n";
                 echo $result[$i]['ITEM'];
                 echo "</td>\r\n";
 
@@ -64,22 +65,36 @@
                 echo $result[$i]['PRICE'];
                 echo "</td>\r\n";
 
+                echo "<form method=\"POST\" action=\"function/deletemenu.php\" onSubmit=\"Delete();return false\"/>\r\n";
+                echo "<input type=\"hidden\" name=\"license\" value=\"".$license."\"/>";
+                echo "<input type=\"hidden\" name=\"item\" value=\"".$result[$i]['ITEM']."\"/>";
+                echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
+                echo "<input type=\"submit\" value=\"Delete\" style=\"font-size:15px; height:26px; color:white; background-color:#74416c; border:none;\" />";
+                echo "</td>\r\n";
+                echo "</form>";
+
                 echo "</tr>\r\n";
             }
+            echo "<form enctype=\"multipart/form-data\" name=\"MenuForm\" action=\"function/addmenu.php\" method=\"POST\">";
+            echo "<input type=\"hidden\" name=\"buid\"/>";
+            echo "<input type=\"hidden\" name=\"license\"/>";
             echo "<tr>\r\n";
 
-            echo "<td align=\"center\" class=\"myform\" width=\"210\" height=\"110\">\r\n";
+            echo "<td align=\"center\" class=\"myform\" width=\"160\" height=\"110\">\r\n";
             echo "<input type=\"file\" name=\"upitem\" onchange=\"document.all.itempath.value=document.all.upitem.value;\" style=\"display:none;\"/>\r\n";
-            echo "<input type=\"text\" name=\"itempath\" style=\"font-size:15px; height:25px; width:200px; color:#808080;\" readonly/><br><br>\r\n";
+            echo "<input type=\"text\" name=\"itempath\" style=\"font-size:15px; height:25px; width:150px; color:#808080;\" readonly/><br><br>\r\n";
             echo "<input type=\"button\" value=\"Upload\" onclick=\"document.all.upitem.click();\" style=\"font-size:15px; height:26px; color:white; background-color:#74416c; border:none;\" />\r\n";
             echo "</td>\r\n";
 
-            echo "<td align=\"center\" class=\"myform\" width=\"400\" style=\"word-break:break-all;color:#000000\">\r\n";
+            echo "<td align=\"center\" class=\"myform\" width=\"350\" style=\"word-break:break-all;color:#000000\">\r\n";
             echo "<input type=\"text\" name=\"item\" size=\"30\"/>\r\n";
             echo "</td>\r\n";
 
             echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
             echo "<input type=\"number\" name=\"price\" style=\"width:90px;\"/>\r\n";
+            echo "</td>\r\n";
+
+            echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
             echo "</td>\r\n";
 
             echo "</tr>\r\n";
@@ -89,10 +104,13 @@
                 for($i=0; $i<3-count($result); $i++){
                     echo "<tr>\r\n";
 
-                    echo "<td align=\"center\" class=\"myform\" width=\"210\" height=\"110\">\t\n";
+                    echo "<td align=\"center\" class=\"myform\" width=\"160\" height=\"110\">\t\n";
                     echo "</td>\r\n";
 
-                    echo "<td align=\"center\" class=\"myform\" width=\"400\" style=\"word-break:break-all;color:#000000\">\r\n";
+                    echo "<td align=\"center\" class=\"myform\" width=\"350\" style=\"word-break:break-all;color:#000000\">\r\n";
+                    echo "</td>\r\n";
+
+                    echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
                     echo "</td>\r\n";
 
                     echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
@@ -103,20 +121,26 @@
             }
         }
         else{
+            echo "<form enctype=\"multipart/form-data\" name=\"MenuForm\" action=\"function/addmenu.php\" method=\"POST\">";
+            echo "<input type=\"hidden\" name=\"buid\"/>";
+            echo "<input type=\"hidden\" name=\"license\"/>";
             echo "<tr>\r\n";
 
-            echo "<td align=\"center\" class=\"myform\" width=\"210\" height=\"110\">\r\n";
+            echo "<td align=\"center\" class=\"myform\" width=\"160\" height=\"110\">\r\n";
             echo "<input type=\"file\" name=\"upitem\" onchange=\"document.all.itempath.value=document.all.upitem.value;\" style=\"display:none;\"/>\r\n";
-            echo "<input type=\"text\" name=\"itempath\" style=\"font-size:15px; height:25px; width:200px; color:#808080;\" readonly/><br><br>\r\n";
+            echo "<input type=\"text\" name=\"itempath\" style=\"font-size:15px; height:25px; width:150px; color:#808080;\" readonly/><br><br>\r\n";
             echo "<input type=\"button\" value=\"Upload\" onclick=\"document.all.upitem.click();\" style=\"font-size:15px; height:26px; color:white; background-color:#74416c; border:none;\" />\r\n";
             echo "</td>\r\n";
 
-            echo "<td align=\"center\" class=\"myform\" width=\"400\" style=\"word-break:break-all;color:#000000\">\r\n";
+            echo "<td align=\"center\" class=\"myform\" width=\"350\" style=\"word-break:break-all;color:#000000\">\r\n";
             echo "<input type=\"text\" name=\"item\" size=\"30\"/>\r\n";
             echo "</td>\r\n";
 
             echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
             echo "<input type=\"number\" name=\"price\" style=\"width:90px;\"/>\r\n";
+            echo "</td>\r\n";
+
+            echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
             echo "</td>\r\n";
 
             echo "</tr>\r\n";
@@ -126,10 +150,13 @@
             for($i=0; $i<3; $i++){
                 echo "<tr>\r\n";
 
-                echo "<td align=\"center\" class=\"myform\" width=\"210\" height=\"110\">\r\n";
+                echo "<td align=\"center\" class=\"myform\" width=\"160\" height=\"110\">\r\n";
                 echo "</td>\r\n";
 
-                echo "<td align=\"center\" class=\"myform\" width=\"400\" style=\"word-break:break-all;color:#000000\">\r\n";
+                echo "<td align=\"center\" class=\"myform\" width=\"350\" style=\"word-break:break-all;color:#000000\">\r\n";
+                echo "</td>\r\n";
+
+                echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
                 echo "</td>\r\n";
 
                 echo "<td align=\"center\" class=\"myform\" width=\"100\" style=\"word-break:break-all;color:#000000\">\r\n";
@@ -437,7 +464,7 @@
                         </tr>
                         <tr>
                         	<td colspan="8" align="center">
-                            	<input type="submit" value="Modify" class="mymenu" style="height:50px; width:90%; color:white; background-color:#74416c; border:none;" />
+                            	<input type="submit" value="Save Changes" class="mymenu" style="height:50px; width:90%; color:white; background-color:#74416c; border:none;" />
                             </td>
                         </tr>
                         </form>
@@ -445,16 +472,14 @@
                         <tr>
                             <td height="60" width="170" class="myform" align="center" colspan="8" style="font-size:25px;">Menu</td>
                         </tr>
-                    	<form enctype="multipart/form-data" name="MenuForm" action="function/addmenu.php" method="POST">
-                        <input type="hidden" name="buid"/>
-                        <input type="hidden" name="license"/>
                         <tr>
                             <td colspan="8">
                                 <table border="3" cellpadding="0" cellspacing="0" width="100%" align="center" style="border-collapse:collapse;" rules="rows" frame="hsides">
                                     <tr bgcolor="#96638e"> 
-                                        <td class="myform" align="center" height="30" width="210" style="font-size:15px; color:#ffffff;">Image</td>
-                                        <td class="myform" align="center" height="30" width="400" style="font-size:15px; color:#ffffff;">Item</td>
+                                        <td class="myform" align="center" height="30" width="160" style="font-size:15px; color:#ffffff;">Image</td>
+                                        <td class="myform" align="center" height="30" width="350" style="font-size:15px; color:#ffffff;">Item</td>
                                         <td class="myform" align="center" height="30" width="100" style="font-size:15px; color:#ffffff;">Price</td>
+                                        <td class="myform" align="center" height="30" width="100" style="font-size:15px; color:#ffffff;"></td>
                                     </tr>
                                     <?php drawMenu($conn, $license); ?>
                                 </table>
