@@ -168,7 +168,7 @@
     }
 
     function drawReview($conn, $license){
-        $query  = "select GRADE, NOTE, CID, DATE from REVIEW where ";
+        $query  = "select GRADE, NOTE, CID, DAY from REVIEW where ";
         $query .= "LICENSE='".$license."'";
 
         $result = selectQuery($conn, $query);
@@ -195,7 +195,7 @@
                 echo "</td>";
 
                 echo "<td align=\"center\" class=\"myform\" style=\"word-break:break-all;color:#000000\">";
-                echo $result[$i]['DATE'];
+                echo $result[$i]['DAY'];
                 echo "</td>";
 
                 echo "</tr>";
