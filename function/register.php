@@ -28,7 +28,7 @@
             $uploadfile = "uploads/".$img; 
 
             $query  = "select * from BEACON ";
-            $query .= "where BUID='".$buid."' and ";
+            $query .= "where BUID='".$buid."' or ";
             $query .= "LICENSE='".$license."'";
 
             $result = selectQuery($conn, $query);
