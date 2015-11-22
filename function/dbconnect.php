@@ -9,7 +9,7 @@
     $conn = mysqli_connect($host, $user, $pass, $db, $port)or die(mysql_error());
 
     function selectQuery($conn, $query){
-        echo "<script> alert(\"".$query."\"); </script>";
+        //echo "<script> alert(\"".$query."\"); </script>";
         $result = mysqli_query($conn, $query);
 
         $i = 0;
@@ -22,7 +22,7 @@
     }
 
     function executeQuery($conn, $query){
-        echo "<script> alert(\"".$query."\"); </script>";
+        //echo "<script> alert(\"".$query."\"); </script>";
         $success = mysqli_query($conn, $query);
 
         return $success;
