@@ -10,7 +10,7 @@
         $id = $_SESSION['id'];
         $passwd = $_POST['passwd'];
         $newpasswd = $_POST['newpasswd'];
-        $name = $_POST['name'];
+        $name = str_replace("'", "\\'", $_POST['name']);
         $birth = $_POST['person_h'];
         $mail = $_POST['mail_h']."@".$_POST['mail_t'];
         $phone = $_POST['phone_h'].$_POST['phone_m'].$_POST['phone_t'];
