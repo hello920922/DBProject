@@ -18,13 +18,13 @@
             $buid = $_POST['buid'];
             $license = $_POST['license'];
 
-            $img = $buid.$license.$item;
+            $img = str_replace("'", "", $buid.$license.$item);
 
             $uploadfile = "uploads/".$img; 
 
             $query  = "insert into MENU values(";
             $query .= "'".$license."', ";
-            $query .= "'".$item."', ";
+            $query .= "'".str_replace("'", "\\'", $item)."', ";
             $query .= $price.", ";
             $query .= "'".$img."')";
 
