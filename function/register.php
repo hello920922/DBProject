@@ -14,12 +14,12 @@
             include("dbconnect.php");
 
             $id = $_SESSION['id'];
-            $sname = $_POST['name'];
-            $category = $_POST['category'];
+            $sname = str_replace("'", "\\'", $_POST['name']);
+            $category = str_replace("'", "\\'", $_POST['category']);
             $license = $_POST['license'];
             $tel = $_POST['phone_h'].$_POST['phone_m'].$_POST['phone_t'];
             $buid = $_POST['buid'];
-            $addr = $_POST['addr'];
+            $addr = str_replace("'", "\\'", $_POST['addr']);
             $lat = $_POST['lat'];
             $lng = $_POST['lng'];
 
