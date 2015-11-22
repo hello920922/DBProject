@@ -1,7 +1,7 @@
 <?php
     $id = $_POST['id'];
     $passwd = $_POST['passwd'];
-    $name = $_POST['name'];
+    $name = str_replace("'", "\\'", $_POST['name']);
     $birth = $_POST['person_h'];
     $personno = $_POST['person_t'];
     $gender = $_POST['gender'];

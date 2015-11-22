@@ -8,14 +8,6 @@
     $query .= "OID='".$id."' and ";
     $query .= "PASSWORD=password('".$passwd."')";
 
-    /*
-    echo "<script> alert(\"";
-
-    echo $query;
-        
-    echo "\"); </script> ";
-     */
-
     $result = selectQuery($conn, $query);
 
     if($result == null){
