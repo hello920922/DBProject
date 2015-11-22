@@ -12,12 +12,12 @@ else{
     }
 
     include("dbconnect.php");
-    $sname = $_POST['sname'];
-    $category = $_POST['category'];
+    $sname = str_replace("'", "\\'", $_POST['sname']);
+    $category = str_replace("'", "\\'", $_POST['category']);
     $license = $_POST['license'];
     $buid = $_POST['buid'];
     $tel = $_POST['phone_h'].$_POST['phone_m'].$_POST['phone_t'];
-    $addr = $_POST['addr'];
+    $addr = str_replace("'", "\\'", $_POST['addr']);
     $lat = $_POST['lat'];
     $lng = $_POST['lng'];
 
