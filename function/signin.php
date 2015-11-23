@@ -6,7 +6,7 @@
 
     $query = "select OID, NAME from OWNER WHERE ";
     $query .= "OID='".$id."' and ";
-    $query .= "PASSWORD=password('".$passwd."')";
+    $query .= "PASSWORD='".$passwd."'";
 
     $result = selectQuery($conn, $query);
 

@@ -12,7 +12,7 @@
 
         $query  = "select * from OWNER ";
         $query .= "where OID='".$id."' and ";
-        $query .= "PASSWORD=password('".$passwd."')";
+        $query .= "PASSWORD='".$passwd."'";
 
         $result = selectQuery($conn, $query);
 

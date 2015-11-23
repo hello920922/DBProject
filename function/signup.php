@@ -12,10 +12,10 @@
 
     $query = "insert into OWNER values(";
     $query .= "'".$id."', ";
-    $query .= "password('".$passwd."'), ";
+    $query .= "'".$passwd."', ";
     $query .= "'".$name."', ";
     $query .= "'".$birth."', ";
-    $query .= "password('".$personno."'), ";
+    $query .= "'".$personno."', ";
     $query .= "'".$gender."', ";
     $query .= "'".$phone."', ";
     $query .= "'".$mail."')";
