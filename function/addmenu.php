@@ -18,7 +18,7 @@
             $buid = $_POST['buid'];
             $license = $_POST['license'];
 
-            $img = str_replace("'", "", $buid.$license.$item);
+            $img = str_replace("'", "", $license.$item);
 
             $uploadfile = "uploads/".$img; 
 

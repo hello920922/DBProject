@@ -21,7 +21,7 @@ else{
     $lat = $_POST['lat'];
     $lng = $_POST['lng'];
 
-    $img = $buid.$license."store";
+    $img = $license."store";
 
     $uploadfile = "uploads/".$img; 
 
@@ -42,7 +42,7 @@ else{
         echo "<script> history.back(); </script>";
     }
     else{
-        $qrcode = $buid.$license."qrcode";
+        $qrcode = $license."qrcode";
 
         $query  = "update BEACON set ";
         $query .= "BUID='".$buid."', ";

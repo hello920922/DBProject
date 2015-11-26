@@ -23,7 +23,7 @@
             $lat = $_POST['lat'];
             $lng = $_POST['lng'];
 
-            $img = $buid.$license."store";
+            $img = $license."store";
 
             $uploadfile = "uploads/".$img; 
 
@@ -55,7 +55,7 @@
                 echo "<script> history.back(); </script>";
             }
             else{
-                $qrcode = $buid.$license."qrcode";
+                $qrcode = $license."qrcode";
 
                 $query  = "insert into BEACON values(";
                 $query .= "'".$buid."', ";
@@ -68,13 +68,18 @@
                     echo "<script> history.back(); </script>";
                 }
                 else{
+                    $img_url = 'http://chart.apis.google.com/chart?cht=qr&chs=300x300&choe=UTF-8&chld=H|0&chl='.$license;
+                    $img_name = basename($img_url); 
+                    $content = file_get_contents($img_url); 
+                    $fh = fopen("./uploads/".$qrcode, 'w'); 
+                    fwrite($fh, $content); 
+                    fclose($fh); 
                     if(is_uploaded_file($_FILES['upfile']['tmp_name'])){
                     }
                     if(!move_uploaded_file($_FILES['upfile']['tmp_name'], $uploadfile)){
                         echo "<script> alert(\"Upload fail....\"); </script>";
                         echo "<script> history.back(); </script>";
                     }
-
                     echo "<script> location.replace(\"../\"); </script>";
                 }
             }

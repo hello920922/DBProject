@@ -442,7 +442,7 @@
                             </td>
                             <td width="50"></td>
                             <td colspan="4" style="padding-left:80px;">
-                                <img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&choe=UTF-8&chld=H|0&chl=<?php echo $qrcode; ?>" width="200" height="200"/>
+                                <img src="function/uploads/<?php echo $qrcode; ?>" width="200" height="200"/>
                             </td>
                         </tr>
                         <tr><td height="20"></td></tr>

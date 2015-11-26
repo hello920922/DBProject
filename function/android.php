@@ -241,5 +241,30 @@
             exit;
         }
     }
+    else if(!strcmp($func,"deleteacc")){
+        include("dbconnect.php");
+
+        $cid = $_POST['cid'];
+        $passwd = $_POST['passwd'];
+
+        $query  = "select * from CUSTOMER where ";
+        $query .= "CID='".$cid."' and PASSWORD='".$passwd."'";
+
+        $result = selectQuery($conn, $query);
+        if($result==null){
+            echo "WRONG";
+            exit;
+        }
+
+        $query  = "delete from CUSTOMER where ";
+        $query .= "CID='".$cid."'";
+
+        $result = executeQuery($conn, $query);
+
+        if($result){
+            echo "SUCCESS";
+            exit;
+        }
+    }
     echo "ERROR";
 ?>
